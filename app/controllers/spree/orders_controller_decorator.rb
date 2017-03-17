@@ -11,7 +11,7 @@ Spree::OrdersController.class_eval do
       if quantity.between?(1, 2_147_483_647)
         begin
           order.contents.add(variant, quantity, options)
-      if params[ :order ][ "comment" ].present?
+      if params[ :order ].present? and params[ :order ][ "comment" ].present?
 	last_line_item = Spree::LineItem.where( :order_id => order.id ).last
         comment = Spree::Comment.new( :commentable_type => "Spree::Order", :commentable_id => order.id, :comment => "CUSTOM LABEL " + last_line_item.id.to_s + ": " + params[ :order ][ "comment" ] )
         comment.save
