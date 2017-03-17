@@ -1,7 +1,0 @@
-<!-- insert_before '#inside-product-cart-form' -->
-<%# Womens Lab coat = 42   %>
-<%# Lab coat = 43   %>
-<% if @product.id == 42 or @product.id == 43 %>
-
-Custom Name Label: <%= f.text_area 'comment' %>
-<% end %>
