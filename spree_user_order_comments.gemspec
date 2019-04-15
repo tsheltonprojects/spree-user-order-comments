@@ -2,7 +2,7 @@
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
   s.name        = 'spree_user_order_comments'
-  s.version     = '1.0.0.rc1'
+  s.version     = '1.0.1.rc1'
   s.summary     = 'Order comment for users.'
   s.description = 'Adds a comment field on each order for the user.'
   s.required_ruby_version = '>= 1.8.7'

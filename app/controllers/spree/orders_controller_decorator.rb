@@ -12,8 +12,14 @@ Spree::OrdersController.class_eval do
         begin
           order.contents.add(variant, quantity, options)
       if params[ :order ].present? and params[ :order ][ "comment" ].present?
-	last_line_item = Spree::LineItem.where( :order_id => order.id ).last
-        comment = Spree::Comment.new( :commentable_type => "Spree::Order", :commentable_id => order.id, :comment => "CUSTOM LABEL " + last_line_item.id.to_s + ": " + params[ :order ][ "comment" ] )
+	last_line_item = Spree::LineItem.where( :order_id => order.id, :variant_id => params[ :variant_id ].to_i  ).last
+
+	comment = order.comments.where( "comment LIKE '%CUSTOM LABEL " + last_line_item.id.to_s + "%'" ).first
+	if comment.nil?
+	        comment = Spree::Comment.new( :commentable_type => "Spree::Order", :commentable_id => order.id, :comment => "CUSTOM LABEL " + last_line_item.id.to_s + ": " + params[ :order ][ "comment" ] )
+	else
+		comment.comment = "CUSTOM LABEL " + last_line_item.id.to_s + ": " + params[ :order ][ "comment" ]
+	end
         comment.save
       end
 
